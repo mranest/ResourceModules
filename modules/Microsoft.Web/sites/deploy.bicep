@@ -134,6 +134,9 @@ param diagnosticMetricsToEnable array = [
 @description('Optional. The name of the diagnostic setting, if deployed.')
 param diagnosticSettingsName string = '${name}-diagnosticSettings'
 
+@description('Optional. Identity to use for Key Vault Reference authentication.')
+param keyVaultReferenceIdentity string = ''
+
 // =========== //
 // Variables   //
 // =========== //
@@ -196,6 +199,7 @@ resource app 'Microsoft.Web/sites@2021-03-01' = {
     storageAccountRequired: storageAccountRequired
     virtualNetworkSubnetId: !empty(virtualNetworkSubnetId) ? virtualNetworkSubnetId : any(null)
     siteConfig: siteConfig
+    keyVaultReferenceIdentity: !empty(keyVaultReferenceIdentity) ? keyVaultReferenceIdentity : any(null)
   }
 }
 
